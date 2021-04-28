@@ -10,7 +10,7 @@
     "react-dom": "17.0.2",
     "react-scripts": "4.0.0",
     "recoil": "0.2.0",
-    "recoil-model": "0.0.0-alpha.19",
+    "recoil-model": "0.0.0-alpha.20",
     "yup": "0.32.9"
   },
   "devDependencies": {
@@ -23,5 +23,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

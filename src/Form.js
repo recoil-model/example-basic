@@ -4,10 +4,19 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { Card, CardActions } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import { RecoilModelField } from "recoil-model";
 import { userModel } from "./recoil/model";
-import { useRecoilCallback, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilCallback, useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import userCallback from "./recoil/callbacks";
+const TextFieldRecoil = ({ field, ...props }) => {
+
+  const [value, setValue] = useRecoilState(field.value)
+  const validate = useRecoilValue(field.validate)
+
+  return <TextField value={value}
+    onChange={(e) => setValue(e.target.value)}
+    error={validate.error}
+    helperText={validate.message} {...props} />
+}
 const Submit = () => {
   const validate = useRecoilValue(userModel.validate);
   const save = useRecoilCallback(userCallback.save);
@@ -46,128 +55,67 @@ const Form = () => (
     <Grid item xs={12} sm={10} md={5}>
       <Card style={{ backgroundColor: "#e0e0e0" }}>
         <CardContent style={{ backgroundColor: "#f5f5f5" }}>
-          <RecoilModelField
+          <TextFieldRecoil
             field={userModel.fields.firstName}
-            component={({ value, setValue, validate }) => {
-              console.log(validate);
-              return (
-                <TextField
-                  label="FirstName"
-                  name="firstName"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  error={validate.error}
-                  helperText={validate.message}
-                  margin="normal"
-                  fullWidth
-                  variant="outlined"
-                  required
-                />
-              );
-            }}
+            label="FirstName"
+            name="firstName"
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            required
           />
 
-          <RecoilModelField
+          <TextFieldRecoil
             field={userModel.fields.lastName}
-            component={({ value, setValue, validate }) => {
-              return (
-                <TextField
-                  label="LastName"
-                  name="lastName"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  error={validate.error}
-                  helperText={validate.message}
-                  margin="normal"
-                  fullWidth
-                  variant="outlined"
-                  required
-                />
-              );
-            }}
+            label="LastName"
+            name="lastName"
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            required
           />
 
-          <RecoilModelField
+          <TextFieldRecoil
             field={userModel.fields.username}
-            component={({ value, setValue, validate }) => {
-              return (
-                <TextField
-                  label="Username"
-                  name="username"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  error={validate.error}
-                  helperText={validate.message}
-                  margin="normal"
-                  fullWidth
-                  variant="outlined"
-                  required
-                />
-              );
-            }}
+            label="Username"
+            name="username"
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            required
           />
 
-          <RecoilModelField
+          <TextFieldRecoil
             field={userModel.fields.email}
-            component={({ value, setValue, validate }) => {
-              return (
-                <TextField
-                  label="Email"
-                  name="email"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  error={validate.error}
-                  helperText={validate.message}
-                  margin="normal"
-                  type="email"
-                  fullWidth
-                  variant="outlined"
-                  required
-                />
-              );
-            }}
+            label="Email"
+            name="email"
+            margin="normal"
+            type="email"
+            fullWidth
+            variant="outlined"
+            required
           />
 
-          <RecoilModelField
+          <TextFieldRecoil
             field={userModel.fields.password}
-            component={({ value, setValue, validate }) => {
-              return (
-                <TextField
-                  label="Password"
-                  name="password"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  error={validate.error}
-                  helperText={validate.message}
-                  margin="normal"
-                  type="password"
-                  fullWidth
-                  variant="outlined"
-                  required
-                />
-              );
-            }}
+            label="Password"
+            name="password"
+            margin="normal"
+            type="password"
+            fullWidth
+            variant="outlined"
+            required
           />
 
-          <RecoilModelField
+          <TextFieldRecoil
             field={userModel.fields.cPassword}
-            component={({ value, setValue, validate }) => {
-              return (
-                <TextField
-                  label="Password Confirmation"
-                  name="cPassword"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  error={validate.error}
-                  helperText={validate.message}
-                  margin="normal"
-                  type="password"
-                  fullWidth
-                  variant="outlined"
-                  required
-                />
-              );
-            }}
+            label="Password Confirmation"
+            name="cPassword"
+            margin="normal"
+            type="password"
+            fullWidth
+            variant="outlined"
+            required
           />
         </CardContent>
         <CardActions>
